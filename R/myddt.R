@@ -14,7 +14,6 @@
 
 myddt <- function(df, SPECIES)
 {
-  SPECIES <- NULL
   WEIGHT <- NULL
   LENGTH <- NULL
   RIVER <- NULL
