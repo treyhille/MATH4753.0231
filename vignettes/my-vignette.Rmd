@@ -1,0 +1,109 @@
+---
+title: "MATH4753.0231"
+author: "Trey Hille"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MATH4753.0231)
+```
+
+# The MATH4753.0231 Package
+
+This package contains several functions accumulated over the time spent completing the applied statistics course, MATH4753. It contains two sets of data as well as 8 functions. Of the 8 functions included, 6 return plots of various data, one returns a probability when given a negative binomial distribution, and one returns the working directory.
+
+## Data Sets  
+
+* This package contains two data sets:  
+
+### ddt  
+  * A data set collected by the US forces from the Tennessee River and its tributaries.  
+  * Includes samples taken from three main rivers: FCM, LCM, and TRM.  
+  * Samples from the rivers include three different species of fish; their length(cm), weight(g), and DDT content were recorded.  
+```{r}
+head(ddt)
+```
+
+### fire  
+  * A data set which measures how far a fire originated from a fire station and how much damage the fire cause, in dollars.  
+  * Includes two variables: The distance that a fire started from a fire station(miles) and the amount of damage done($1000) 
+```{r}
+head(fire)
+```
+
+## Non-Graphical Functions  
+
+* This package contains two non-graphical functions: 
+
+### mygetwd()
+
+Returns the working directory.
+```{r}
+mygetwd()
+```
+
+### mynbin()
+
+Returns the probability of the number of successes based on a negative binomial distribution.  
+```{r}
+mynbin(10, 3, 0.4)
+```
+
+
+## Graphical Functions  
+
+* This package contains 6 functions that return plots:  
+
+### myboot2()
+
+Returns a histogram of the distribution of the sampled data from the population. On the histogram is a labeled confidence interval. 
+```{r}
+myboot2(iter = 10000, x = ddt$DDT, fun = "var", alpha = 0.2)
+```
+
+### myclt()
+
+Returns a plot of the shape of the sample distribution taken randomly from a uniform distribution.  
+```{r}
+myclt(n = 20, iter = 100000, a = 0, b = 10)
+```
+
+### mymaxlikg()
+
+Returns a graphical likelihood of a probability based on a supplied likelihood function. 
+```{r}
+mymaxlikg(lfun = "log", theta = seq(0,1,length=1000))
+```
+
+### myncurve()
+
+Returns a plot and numerical value for the probability of a given number of successes for a normal distribution.  
+```{r}
+myncurve(10, 4, 3)
+```
+
+### scatterhist()
+
+Returns a scatter plot histogram based on two given parameters and their respective labels.  
+```{r}
+scatterhist(ddt$LENGTH, ddt$WEIGHT, xlab = "Length", ylab = "Weight")
+```
+
+### myddt()
+
+Returns a plot of the length vs. the weight of a given species, color coded by river. Also returns the entire data frame, the subsetted data frame, and a RIVER relative frequency table.  
+```{r}
+myddt(df = ddt, SPECIES = "CCATFISH")
+```
